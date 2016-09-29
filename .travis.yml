@@ -3,4 +3,6 @@ python:
 cache:
     - venv
 script: make travis
-sudo: false
+sudo: required
+services:
+  - docker
