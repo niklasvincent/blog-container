@@ -1,0 +1,33 @@
+0.0.0.0:2015
+
+tls off
+
+proxy / https://{{upstream_host}}/ {
+    header_upstream Host {{upstream_host}}
+}
+
+minify
+
+gzip
+
+log stdout
+
+errors stdout
+
+header / {
+    Vary: Accept-Encoding
+
+    Access-Control-Allow-Origin	"https://{{domain}}"
+
+    Strict-Transport-Security "max-age={{strict_transport_security.max_age}}; includeSubdomains; preload;";
+
+    Content-Security-Policy "default-src 'none'; script-src {% for script_sha256 in content_security_policy.script_hashes %}'{{script_sha256}}' {% endfor %} {{content_security_policy.script_src}}; object-src 'none'; style-src 'unsafe-inline' {{content_security_policy.style_src}}; img-src data: {{content_security_policy.img_src}}; media-src 'none'; frame-src 'none'; font-src 'none'; connect-src 'none'; upgrade-insecure-requests; block-all-mixed-content; reflected-xss block; base-uri https://{{domain}}; referrer no-referrer-when-downgrade;"
+
+    Public-Key-Pins "{% for pin_sha256 in public_key_pinning.pin_sha256s %}pin-sha256='{{pin_sha256}}';{% endfor %}max-age={{public_key_pinning.max_age}};"
+
+    X-XSS-Protection "1; mode=block"
+    # Prevent some browsers from MIME-sniffing a response away from the declared Content-Type
+    X-Content-Type-Options "nosniff"
+    # Disallow the site to be rendered within a frame (clickjacking protection)
+    X-Frame-Options "DENY"
+}
