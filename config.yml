@@ -19,9 +19,9 @@ content_security_policy:
     img_src: "https://ssl.google-analytics.com https://cdn.niklaslindblad.se"
     script_hashes:
         # E-mail obfuscation
-        - "sha256-llhA4UPSasTxEJDwCp0nuqY5MZe4Qk/wRvlDB8jLnik="
+        - "sha256-5RKixd6vjLXikn4B8g4Xb/rYEgKzN1TttXBJvLuvAnU="
         # Google Analytics
-        - "sha256-XlVRbei+knokasb5GzRj/mg6/qTRhirP8n9pxHs8lo0="
+        - "sha256-yncIusuE3ym1jQ7n9FkB3qVzZx26lj6GoJTvwNmIVvM="
 strict_transport_security:
     max_age: 63072000
 public_key_pinning:
